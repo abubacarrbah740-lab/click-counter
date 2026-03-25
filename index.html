@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<body style="background:black; color:white; text-align:center;">
+
+<h1>Click Counter</h1>
+
+<h2 id="count">0</h2>
+
+<button onclick="increase()" style="padding:15px 
+25px; background:green; color:white;">Increase</
+button>
+<button onclick="decrease()" style="padding:15px
+ 25px; background:red; color:white;">Decrease</
+button>
+<button onclick="resetCount()"
+ style="padding:15px 25px; background:blue;
+ color:white;">Reset</button>
+
+<!-- Sound -->
+<audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3" preload="auto"></audio>
+
+<style>
+#count {
+  font-size: 40px;
+  transition: transform 0.2s, color 0.2s;
+}
+button {
+  transition: transform 0.1s;
+}
+
+button:active {
+  transform: scale(0.9);
+}
+</style>
+
+<script>
+let count = 0;
+
+function playSound() {
+let sound = document.getElementById("clickSound");
+  sound.currentTime = 0;
+  sound.play();
+}
+
+function animate(type) {
+let el = document.getElementById("count");
+
+  el.style.transform = "scale(1.4)";
+
+  if (type === "up") {
+    el.style.color = "lime";
+  } else if (type === "down") {
+    el.style.color = "red";
+  } else {
+    el.style.color = "cyan";
+  }
+
+  setTimeout(() => {
+    el.style.transform = "scale(1)";
+    el.style.color = "white";
+  }, 200);
+}
+
+function increase() {
+  count = count + 1;
+  document.getElementById("count").innerText = count;
+  animate("up");
+  playSound();
+}
+
+function decrease() {
+  if (count > 0) {
+    count = count - 1;
+    document.getElementById("count").innerText = count;
+    animate("down");
+    playSound();
+  }
+}
+
+function resetCount() {
+  count = 0;
+  document.getElementById("count").innerText = count;
+  animate("reset");
+  playSound();
+}
+</script>
+
+</body>
+</html>
