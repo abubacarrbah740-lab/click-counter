@@ -1,76 +1,82 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Click Counter</title>
+  <title>Tasbeeh Counter</title>
+
+  <style>
+    body {
+      background: #0d1117;
+      color: white;
+      font-family: Arial;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 5px;
+    }
+
+    h3 {
+      color: #ccc;
+      margin-bottom: 20px;
+    }
+
+    #count {
+      font-size: 60px;
+      margin: 20px 0;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 15px 25px;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      color: white;
+    }
+
+    .green { background: #2ea043; }
+    .red { background: #f85149; }
+    .blue { background: #1f6feb; }
+    .purple { background: #8e44ad; }
+
+    #goalText {
+      margin-top: 15px;
+      color: #aaa;
+    }
+  </style>
 </head>
 
 <body>
 
 <div class="container">
-  <h1>Click Counter</h1>
+  <h1>🕌 Tasbeeh Counter</h1>
+  <h3>SubhanAllah (سبحان الله)</h3>
+
   <h2 id="count">0</h2>
 
   <div class="buttons">
-    <button onclick="increase()" class="btn green">Increase</button>
-    <button onclick="decrease()" class="btn red">Decrease</button>
-    <button onclick="resetCount()" class="btn blue">Reset</button>
+    <button onclick="increase()" class="btn green">+1</button>
+    <button onclick="addTen()" class="btn purple">+10</button>
+    <button onclick="resetCount()" class="btn red">Reset</button>
   </div>
+
+  <p id="goalText">Goal: 33</p>
 </div>
 
-<style>
-body {
-  background: #0d1117;
-  color: white;
-  font-family: Arial;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-}
-
-.container {
-  text-align: center;
-}
-
-h1 {
-  margin-bottom: 10px;
-}
-
-#count {
-  font-size: 60px;
-  margin: 20px 0;
-  transition: transform 0.2s;
-}
-
-.buttons {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-}
-
-.btn {
-  padding: 15px 25px;
-  border: none;
-  border-radius: 10px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.btn:hover {
-  transform: scale(1.1);
-}
-
-.btn:active {
-  transform: scale(0.95);
-}
-
-.green { background: #2ea043; color: white; }
-.red { background: #f85149; color: white; }
-.blue { background: #1f6feb; color: white; }
-</style>
-
 <script>
 let count = localStorage.getItem("count") || 0;
 
@@ -79,6 +85,10 @@ update();
 function update() {
   document.getElementById("count").innerText = count;
   localStorage.setItem("count", count);
+
+  if (count == 33) {
+    alert("Alhamdulillah! You reached 33 🎉");
+  }
 }
 
 function increase() {
@@ -86,11 +96,9 @@ function increase() {
   update();
 }
 
-function decrease() {
-  if (count > 0) {
-    count--;
-    update();
-  }
+function addTen() {
+  count = Number(count) + 10;
+  update();
 }
 
 function resetCount() {
@@ -99,32 +107,5 @@ function resetCount() {
 }
 </script>
 
-<script>
-let count = localStorage.getItem("count") || 0;
-
-update();
-
-function update() {
-  document.getElementById("count").innerText = count;
-  localStorage.setItem("count", count);
-}
-
-function increase() {
-  count++;
-  update();
-}
-
-function decrease() {
-  if (count > 0) {
-    count--;
-    update();
-  }
-}
-
-function resetCount() {
-  count = 0;
-  update();
-}
-</script>
 </body>
 </html>
