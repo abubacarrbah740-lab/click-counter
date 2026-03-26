@@ -99,6 +99,21 @@ function resetCount() {
 }
 </script>
 
+<script>
+let count = localStorage.getItem("count") || 0;
+
+update();
+
+function update() {
+  document.getElementById("count").innerText = count;
+  localStorage.setItem("count", count);
+}
+
+function increase() {
+  count++;
+  update();
+}
+
 function decrease() {
   if (count > 0) {
     count--;
@@ -111,6 +126,5 @@ function resetCount() {
   update();
 }
 </script>
-
 </body>
 </html>
