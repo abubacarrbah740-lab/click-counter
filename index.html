@@ -1,87 +1,98 @@
 <!DOCTYPE html>
 <html>
-<body style="background:black; color:white; text-align:center;">
+<head>
+  <title>Click Counter</title>
+</head>
 
-<h1>Click Counter</h1>
+<body>
 
-<h2 id="count">0</h2>
+<div class="container">
+  <h1>Click Counter</h1>
+  <h2 id="count">0</h2>
 
-<button onclick="increase()" style="padding:15px 
-25px; background:green; color:white;">Increase</
-button>
-<button onclick="decrease()" style="padding:15px
- 25px; background:red; color:white;">Decrease</
-button>
-<button onclick="resetCount()"
- style="padding:15px 25px; background:blue;
- color:white;">Reset</button>
-
-<!-- Sound -->
-<audio id="clickSound" src="https://www.soundjay.com/buttons/sounds/button-16.mp3" preload="auto"></audio>
+  <div class="buttons">
+    <button onclick="increase()" class="btn green">Increase</button>
+    <button onclick="decrease()" class="btn red">Decrease</button>
+    <button onclick="resetCount()" class="btn blue">Reset</button>
+  </div>
+</div>
 
 <style>
-#count {
-  font-size: 40px;
-  transition: transform 0.2s, color 0.2s;
-}
-button {
-  transition: transform 0.1s;
+body {
+  background: #0d1117;
+  color: white;
+  font-family: Arial;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
 }
 
-button:active {
-  transform: scale(0.9);
+.container {
+  text-align: center;
 }
+
+h1 {
+  margin-bottom: 10px;
+}
+
+#count {
+  font-size: 60px;
+  margin: 20px 0;
+  transition: transform 0.2s;
+}
+
+.buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.btn {
+  padding: 15px 25px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+.green { background: #2ea043; color: white; }
+.red { background: #f85149; color: white; }
+.blue { background: #1f6feb; color: white; }
 </style>
 
 <script>
 let count = 0;
 
-function playSound() {
-let sound = document.getElementById("clickSound");
-  sound.currentTime = 0;
-  sound.play();
-}
-
-function animate(type) {
-let el = document.getElementById("count");
-
-  el.style.transform = "scale(1.4)";
-
-  if (type === "up") {
-    el.style.color = "lime";
-  } else if (type === "down") {
-    el.style.color = "red";
-  } else {
-    el.style.color = "cyan";
-  }
-
-  setTimeout(() => {
-    el.style.transform = "scale(1)";
-    el.style.color = "white";
-  }, 200);
+function update() {
+  document.getElementById("count").innerText = count;
 }
 
 function increase() {
-  count = count + 1;
-  document.getElementById("count").innerText = count;
-  animate("up");
-  playSound();
+  count++;
+  update();
 }
 
 function decrease() {
   if (count > 0) {
-    count = count - 1;
-    document.getElementById("count").innerText = count;
-    animate("down");
-    playSound();
+    count--;
+    update();
   }
 }
 
 function resetCount() {
   count = 0;
-  document.getElementById("count").innerText = count;
-  animate("reset");
-  playSound();
+  update();
 }
 </script>
 
